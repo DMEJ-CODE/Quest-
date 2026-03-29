@@ -1,0 +1,233 @@
+/* ================================================================
+   QUEST DASHBOARD — SUBMENU STYLES
+   Additional styles for the dual sidebar + submenu system
+================================================================ */
+
+:root {
+    --g100: #dcfce7;
+    --g200: #bbf7d0;
+    --g300: #86efac;
+    --g400: #4ade80;
+    --g500: #22c55e;
+    --g600: #16a34a;
+    --g700: #15803d;
+    --g800: #166534;
+    --g900: #14532d;
+    --accent: #22c55e;
+    --accent-d: #16a34a;
+    --accent-l: #4ade80;
+    --bg: #f6fefa;
+    --bg2: #edfbf3;
+    --bg3: #f0fdf4;
+    --card: #ffffff;
+    --txt: #071a0e;
+    --txt2: #374151;
+    --txt3: #6b7280;
+    --txt4: #9ca3af;
+    --bdr: #c6f6d5;
+    --bdr2: #e5e7eb;
+    --sh: rgba(22, 163, 74, .10);
+    --sh2: rgba(22, 163, 74, .22);
+    --ff: 'Syne', sans-serif;
+    --fb: 'DM Sans', sans-serif;
+    --ease: .26s cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-bs-theme="dark"] {
+    --bg: #040d07;
+    --bg2: #071209;
+    --bg3: #0a1a0f;
+    --card: #0d1f12;
+    --txt: #ecfdf5;
+    --txt2: #d1fae5;
+    --txt3: #86efac;
+    --txt4: #4ade80;
+    --bdr: #1a3a24;
+    --bdr2: #1e3326;
+    --sh: rgba(34, 197, 94, .15);
+    --sh2: rgba(34, 197, 94, .28);
+}
+
+
+/* ================================================================
+   SUBMENU ANIMATIONS
+================================================================ */
+
+@keyframes slideInSubmenu {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutSubmenu {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+
+/* ================================================================
+   SUBMENU STYLING
+================================================================ */
+
+.sbi-submenu {
+    animation: slideOutSubmenu 0.2s ease forwards;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.sbi-submenu.open {
+    animation: slideInSubmenu 0.2s ease forwards;
+}
+
+.sbi-submenu-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.sbi-submenu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.2s var(--ease);
+}
+
+.sbi-submenu-item:hover::before,
+.sbi-submenu-item.active::before {
+    transform: scaleY(1);
+}
+
+
+/* ================================================================
+   RESPONSIVE TWEAKS FOR SUBMENU
+================================================================ */
+
+@media (max-width: 768px) {
+    .sbi-submenu {
+        width: 0 !important;
+        position: fixed;
+        left: 62px;
+        z-index: 28;
+    }
+    .sbi-submenu.open {
+        width: 160px !important;
+    }
+}
+
+
+/* ================================================================
+   SMOOTH TRANSITIONS
+================================================================ */
+
+* {
+    transition: color var(--ease), background var(--ease), border-color var(--ease);
+}
+
+button,
+a,
+.card {
+    transition: all var(--ease);
+}
+
+.sbi-btn {
+    transition: all 0.2s var(--ease);
+}
+
+.sbi-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* ================================================================
+   ICON CONSISTENCY
+================================================================ */
+
+.sbn-icon,
+.sbi-submenu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.2em;
+}
+
+i[class*="fas"],
+i[class*="far"],
+i[class*="fad"],
+i[class*="fal"] {
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+
+/* ================================================================
+   BADGE IMPROVEMENTS
+================================================================ */
+
+.sbi-dot {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+
+/* ================================================================
+   FOCUS STATES FOR ACCESSIBILITY
+================================================================ */
+
+.sbi-btn:focus,
+.sbi-submenu-item:focus,
+.sbn-link:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+
+/* ================================================================
+   PRINT STYLES (Hide interactive elements)
+================================================================ */
+
+@media print {
+    .sbi,
+    .sbi-submenu,
+    .topbar,
+    .ham {
+        display: none;
+    }
+    .sbn {
+        position: relative;
+        width: 200px;
+        border-right: 1px solid var(--bdr);
+    }
+    .main-col {
+        grid-column: auto;
+    }
+}
