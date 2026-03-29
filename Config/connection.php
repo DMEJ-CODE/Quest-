@@ -3,9 +3,9 @@
 function getDBconnection()
 {
    
-    $host = 'localhost';
+    $host = 'mysql';
     $dbname = 'votting_sys';
-    $user = 'root';
+    $user = 'questuser';
     $password = '220405..';
 
 
